@@ -49,6 +49,8 @@ class Game:
 
     """ Start a new round with a random wind value (-10 to +10) """
     def newRound(self):
+        setCurrentWind(self,wind):
+            wind=20*random.random()-10
         #HINT: random.random() gives a random value between 0 and 1
         # multiplying this by 20 gives a random value between 0 and 20
         # how do you shift a value between 0 and 20 to one between -10 and +10?
