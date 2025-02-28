@@ -42,6 +42,7 @@ class Game:
 
     """ Set the current wind speed, only used for testing """
     def setCurrentWind(self, wind):
+        self.wind=wind
         pass #TODO: this should do something instead of nothing
 
     
@@ -51,7 +52,7 @@ class Game:
     """ Start a new round with a random wind value (-10 to +10) """
     def newRound(self):
         setCurrentWind(self,wind):
-            wind=20*random.random()-10
+            self.wind=20*random.random()-10
         return wind
     
         #HINT: random.random() gives a random value between 0 and 1
@@ -66,6 +67,8 @@ class Player:
     
     """ Create and return a projectile starting at the centre of this players cannon. Replaces any previous projectile for this player. """
     def fire(self, angle, velocity):
+        self.angle=angle
+        self.velocity=velocity
         # The projectile should start in the middle of the cannon of the firing player
         # HINT: Your job here is to call the constructor of Projectile with all the right values
         # Some are hard-coded, like the boundaries for x-position, others can be found in Game or Player
@@ -73,6 +76,7 @@ class Player:
 
     """ Gives the x-distance from this players cannon to a projectile. If the cannon and the projectile touch (assuming the projectile is on the ground and factoring in both cannon and projectile size) this method should return 0"""
     def projectileDistance(self, proj):
+        self.proj=proj
         # HINT: both self (a Player) and proj (a Projectile) have getX()-methods.
         # HINT: This method should give a negative value if the projectile missed to the left and positive if it missed to the right.
         # The distance should be how far the projectile and cannon are from touching, not the distance between their centers.
