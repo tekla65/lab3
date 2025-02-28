@@ -9,7 +9,8 @@ class Game:
     def __init__(self, cannonSize, ballSize):
         # TODO: "pass" means the constructor does nothing. Clearly it should be doing something.
         # HINT: This constructor needs to create two players according to the rules specified in the assignment text
-        pass 
+        self.cannonSize=cannonSize
+        self.ballSize=ballSize
 
     """ A list containing both players """
     def getPlayers(self):
@@ -51,10 +52,12 @@ class Game:
     def newRound(self):
         setCurrentWind(self,wind):
             wind=20*random.random()-10
+        return wind
+    
         #HINT: random.random() gives a random value between 0 and 1
         # multiplying this by 20 gives a random value between 0 and 20
         # how do you shift a value between 0 and 20 to one between -10 and +10?
-        pass #TODO: this should do something instead of nothing
+         #TODO: this should do something instead of nothing
 
 """ Models a player """
 class Player:
