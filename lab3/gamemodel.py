@@ -11,6 +11,9 @@ class Game:
         # HINT: This constructor needs to create two players according to the rules specified in the assignment text
         self.cannonSize=cannonSize
         self.ballSize=ballSize
+        #ska man ha denna här? self.players = [Player(self, "Player 1", "red", 0), Player(self, "Player 2", "blue", 1)]
+        # då borde detta oxå vara här? self.currentPlayerIndex = 0 
+        # och detta? self.wind = 0
 
     """ A list containing both players """
     def getPlayers(self):
@@ -55,22 +58,22 @@ class Game:
         self.wind=20*random.random()-10
         return wind
     
-        #HINT: random.random() gives a random value between 0 and 1
-        # multiplying this by 20 gives a random value between 0 and 20
-        # how do you shift a value between 0 and 20 to one between -10 and +10?
          #TODO: this should do something instead of nothing
 
 """ Models a player """
 class Player:
-   #TODO: You need to create a constructor here. 
-   #HINT: It should probably take the Game that creates it as parameter and some additional properties that differ between players (like firing-direction, position and color)
+   # klar?   TODO: You need to create a constructor here. 
+                    #HINT: It should probably take the Game that creates it as parameter and some additional properties that differ between players (like firing-direction, position and color)
     def __init__(self, game, right_position, direction, color):
 
         self.game = game  
         self.right_position = right_position  
         self.direction = direction  
         self.color = color 
-        
+
+        #ska score stå här? self.score = 0
+
+
     """ Create and return a projectile starting at the centre of this players cannon. Replaces any previous projectile for this player. """
     def fire(self, angle, velocity):
         self.angle=angle
