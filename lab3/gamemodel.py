@@ -51,8 +51,8 @@ class Game:
 
     """ Start a new round with a random wind value (-10 to +10) """
     def newRound(self):
-        setCurrentWind(self,wind):
-            self.wind=20*random.random()-10
+        setCurrentWind(self,wind)
+        self.wind=20*random.random()-10
         return wind
     
         #HINT: random.random() gives a random value between 0 and 1
@@ -64,7 +64,13 @@ class Game:
 class Player:
    #TODO: You need to create a constructor here. 
    #HINT: It should probably take the Game that creates it as parameter and some additional properties that differ between players (like firing-direction, position and color)
-    
+    def __init__(self, game, right_position, direction, color):
+
+        self.game = game  
+        self.right_position = right_position  
+        self.direction = direction  
+        self.color = color 
+        
     """ Create and return a projectile starting at the centre of this players cannon. Replaces any previous projectile for this player. """
     def fire(self, angle, velocity):
         self.angle=angle
