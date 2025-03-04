@@ -11,13 +11,16 @@ class Game:
         # HINT: This constructor needs to create two players according to the rules specified in the assignment text
         self.cannonSize=cannonSize
         self.ballSize=ballSize
-        #ska man ha denna här? self.players = [Player(self, "Player 1", "red", 0), Player(self, "Player 2", "blue", 1)]
-        # då borde detta oxå vara här? self.currentPlayerIndex = 0 
-        # och detta? self.wind = 0
+       
+        self.players=[Player(self,False,-90,"blue"), Player(self,True,90,"red")]
+   
+        self.currentPlayerIndex = 0 
+        self.wind = 0
+        
 
     """ A list containing both players """
     def getPlayers(self):
-        return [] #TODO: this is just a dummy value
+        return self.players #TODO: this is just a dummy value
 
     """ The height/width of the cannon """
     def getCannonSize(self):
@@ -46,7 +49,7 @@ class Game:
     """ Set the current wind speed, only used for testing """
     def setCurrentWind(self, wind):
         self.wind=wind
-        pass #TODO: this should do something instead of nothing
+         #TODO: this should do something instead of nothing
 
     
     def getCurrentWind(self):
@@ -64,14 +67,14 @@ class Game:
 class Player:
    # klar?   TODO: You need to create a constructor here. 
                     #HINT: It should probably take the Game that creates it as parameter and some additional properties that differ between players (like firing-direction, position and color)
-    def __init__(self, game, right_position, direction, color):
+    def __init__(self, game, isReversed, direction, color):
 
         self.game = game  
-        self.right_position = right_position  
+        self.isReversed = isReversed  
         self.direction = direction  
         self.color = color 
 
-        #ska score stå här? self.score = 0
+        self.score = 0
 
 
     """ Create and return a projectile starting at the centre of this players cannon. Replaces any previous projectile for this player. """
