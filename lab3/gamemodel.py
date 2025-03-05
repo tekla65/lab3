@@ -103,30 +103,43 @@ class Player:
 
     """ Gives the x-distance from this players cannon to a projectile. If the cannon and the projectile touch (assuming the projectile 
     is on the ground and factoring in both cannon and projectile size) this method should return 0"""
-    def projectileDistance(self, proj):
-        #self.proj=proj
+    def projectileDistance(self, proj: 'Projectile'):
+        #self.proj=projs
         # HINT: both self (a Player) and proj (a Projectile) have getX()-methods.
         # HINT: This method should give a negative value if the projectile missed to the left and positive if it missed to the right.
         # The distance should be how far the projectile and cannon are from touching, not the distance between their centers.
         # You probably need to use getCannonSize and getBallSize from Game to compensate for the size of cannons/cannonballs
-        proj.getX()
-        proj.getY()
-        distance_proj=0
-
-        if distance_proj==0:
-            return 0
-        else: 
-            return distance_proj
-    
         
+        projectile_left_edge = proj.getX() - self.game.getBallSize()
+        projectile_right_edge = proj.getX() + self.game.getBallSize()
 
+        player_right_edge = self.getX() + self.game.getCannonSize() / 2
+        player_left_edge = self.getX() - self.game.getCannonSize() / 2
+
+        fall1=player_left_edge - projectile_left_edge
+        fall2=player_left_edge - projectile_right_edge
+        fall3= player_right_edge - projectile_left_edge
+        fall4= player_right_edge -projectile_right_edge
+
+        if fall1 <0:
+            return("missar, går över")
+        elif fall2<0:
+            return("träff")
+        elif fall3<0:
+            ("miss, för kort")
+        elif fall4<0:
+            ("miss,")
+
+
+
+        
     """ The current score of this player """
     def getScore(self):
-        return self.score #TODO: this is just a dummy value
+        return self.score 
 
     """ Increase the score of this player by 1."""
     def increaseScore(self):
-        self.getScore+=1
+        self.score+=1
 
     """ Returns the color of this player (a string)"""
     def getColor(self):

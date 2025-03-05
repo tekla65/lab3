@@ -25,6 +25,7 @@ class GameGraphics:
         return None
 
     def drawScore(self,playerNr):
+        
         # draw the score
         # TODO: draw the text "Score: X", where X is the number of points
         # for player number playerNr. The text should be placed under
