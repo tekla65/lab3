@@ -71,11 +71,11 @@ class Game:
 class Player:
    
     #HINT: It should probably take the Game that creates it as parameter and some additional properties that differ between players (like firing-direction, position and color)
-    def __init__(self, game, isReversed, direction, color):
+    def __init__(self, game, isReversed, start_x_value, color):
 
         self.game = game  
         self.isReversed = isReversed  
-        self.direction = direction  
+        self.start_x_value = start_x_value 
         self.color = color 
         self.score = 0
 
@@ -91,7 +91,7 @@ class Player:
         else:
             start_angle=self.angle     
 
-        starting_x=self.direction #OBS byt alla direction till start_x_value
+        starting_x=self.start_x_value #OBS byt alla direction till start_x_value
         starting_y=0
     
         proj=Projectile(start_angle, velocity, self.game.getCurrentWind(), starting_x, starting_y, -110, 110)
@@ -134,7 +134,7 @@ class Player:
 
     """ The x-position of the centre of this players cannon """
     def getX(self):
-        return self.direction
+        return self.start_x_value
 
     """ The angle and velocity of the last projectile this player fired, initially (45, 40) """
     def getAim(self):
