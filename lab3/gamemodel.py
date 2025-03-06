@@ -111,17 +111,28 @@ class Player:
         # The distance should be how far the projectile and cannon are from touching, not the distance between their centers.
         # You probably need to use getCannonSize and getBallSize from Game to compensate for the size of cannons/cannonballs
         
+
         projectile_x = proj.getX() #x position för boll, hur långt hö/vä från start 
         cannon_x = self.getX() #var kanonen är
         cannon_radius = self.game.getCannonSize() / 2 #ersatte kanterna till att det blir ett fast avstånd från mitten till kant som vi använder istället för att krångla til det med bilden
         ball_radius = self.game.getBallSize()
 
-        distance = projectile_x - cannon_x
+        leftside_cannon = cannon_x-cannon_radius
+        rightside_cannon = cannon_x+cannon_radius
+        leftside_ball=projectile_x-ball_radius
+        rightside_ball=projectile_x+ball_radius 
         
-        if abs(distance) < (cannon_radius + ball_radius):
-            return 0  
-        else:
-            return distance #neg är kort och pos är för långt
+        if rightside_ball < leftside_cannon :
+            if rightside_ball - leftside_cannon <0: 
+                return  rightside_ball - leftside_cannon
+            else: 
+                return 0
+        
+        else: 
+            if leftside_ball - rightside_cannon >0:
+                return leftside_ball - rightside_cannon
+            else:
+                return 0
         
 
         
