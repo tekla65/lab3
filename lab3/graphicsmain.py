@@ -18,9 +18,11 @@ class GameGraphics:
         self.draw_projs   = [None, None]
 
     def drawCanon(self,playerNr):
-        #player=self.game.getPlayers(playerNr)
-        cannon=Rectangle(Point(self.Players.start_x_value -self.game.cannon_radius,0),Point(self.Players.start_x_value+self.game.cannon_radius,self.game.cannonSize))
-        cannon.setFill("red")
+        player=self.game.getPlayers()[playerNr]
+        x=Player.getX()
+        Size=self.game.getCannonSize()
+        cannon=Rectangle(Point(x -self.game.cannon_radius,0),Point(x+self.game.cannon_radius,Size))
+        cannon.setFill(Player.getColor())
         cannon.draw(self.win)
         
         # TODO: draw a square with the size of the cannon with the color
@@ -28,16 +30,16 @@ class GameGraphics:
         # After the drawing, return the rectangle object."""
         return cannon
 
-    def drawScore(self,playerNr):
+    """def drawScore(self,playerNr):
         self.Player.score
         self.draw_scores[playerNr]
-        undraw(score)
+        undraw(score)"""""
         # draw the score
         # TODO: draw the text "Score: X", where X is the number of points
         # for player number playerNr. The text should be placed under
         # the corresponding cannon. After the drawing,
         # return the text object.
-        return None
+        #return 0
 
     def fire(self, angle, vel):
         player = self.game.getCurrentPlayer()
