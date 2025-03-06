@@ -11,21 +11,23 @@ class GameGraphics:
         self.win.setCoords(-110, -10, 110, 155)
         
         # draw the terrain
-        # TODO: Draw a line from (-110,0) to (110,0)
-
+        
+        line = Line(Point(-110,0),Point(110,0)).draw(self.win)
         self.draw_cannons = [self.drawCanon(0), self.drawCanon(1)]
         self.draw_scores  = [self.drawScore(0), self.drawScore(1)]
         self.draw_projs   = [None, None]
 
     def drawCanon(self,playerNr):
-        # draw the cannon
+        player=self.game.getPlayers(playerNr)
+        cannon=Rectangle(Point(-self.game.cannon_radius),Point(0),Point(+self.game.cannon_radius),Point(self.game.cannonSize),self.game.color).draw(self.win)
+        
         # TODO: draw a square with the size of the cannon with the color
         # and the position of the player with number playerNr.
-        # After the drawing, return the rectangle object.
+        # After the drawing, return the rectangle object."""
         return None
 
     def drawScore(self,playerNr):
-        
+        self.Player.score
         # draw the score
         # TODO: draw the text "Score: X", where X is the number of points
         # for player number playerNr. The text should be placed under

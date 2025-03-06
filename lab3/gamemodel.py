@@ -118,7 +118,7 @@ class Player:
 
         distance = projectile_x - cannon_x
         
-        if abs(distance) <= (cannon_radius + ball_radius):
+        if abs(distance) < (cannon_radius + ball_radius):
             return 0  
         else:
             return distance #neg är kort och pos är för långt
