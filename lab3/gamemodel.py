@@ -91,7 +91,7 @@ class Player:
             start_angle=self.angle     
 
         starting_x=self.start_x_value 
-        starting_y=0 #starting_y = self.game.getCannonSize() / 2 ? om bollen ska gå från mitten?
+        starting_y = self.game.getCannonSize() / 2 
     
         proj=Projectile(start_angle, velocity, self.game.getCurrentWind(), starting_x, starting_y, -110, 110)
     
