@@ -120,7 +120,7 @@ class Player:
         # Om projektilens y-koordinat är 0, betyder det att den har landat
         
         if abs(distance) <= (cannon_radius + ball_radius):
-            return 0  #träff  vad vill vi returna?
+            return 0  
         else:
             return distance #neg är kort och pos är för långt
         
