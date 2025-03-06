@@ -77,6 +77,8 @@ class Player:
         self.start_x_value = start_x_value 
         self.color = color 
         self.score = 0
+        self.angle=None
+        self.velocity=None
 
 
     """ Create and return a projectile starting at the centre of this players cannon. Replaces any previous projectile for this player. """
@@ -114,10 +116,7 @@ class Player:
         cannon_radius = self.game.getCannonSize() / 2 #ersatte kanterna till att det blir ett fast avstånd från mitten till kant som vi använder istället för att krångla til det med bilden
         ball_radius = self.game.getBallSize()
 
-        # Beräkna avståndet mellan kanonens centrum och projektilens centrum
         distance = projectile_x - cannon_x
-
-        # Om projektilens y-koordinat är 0, betyder det att den har landat
         
         if abs(distance) <= (cannon_radius + ball_radius):
             return 0  
