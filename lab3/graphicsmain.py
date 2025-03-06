@@ -10,7 +10,7 @@ class GameGraphics:
         self.win = GraphWin("Cannon game" , 640, 480, autoflush=False)
         self.win.setCoords(-110, -10, 110, 155)
         
-        # draw the terrain
+       
         
         line = Line(Point(-110,0),Point(110,0)).draw(self.win)
         self.draw_cannons = [self.drawCanon(0), self.drawCanon(1)]
@@ -18,16 +18,20 @@ class GameGraphics:
         self.draw_projs   = [None, None]
 
     def drawCanon(self,playerNr):
-        player=self.game.getPlayers(playerNr)
-        cannon=Rectangle(Point(-self.game.cannon_radius),Point(0),Point(+self.game.cannon_radius),Point(self.game.cannonSize),self.game.color).draw(self.win)
+        #player=self.game.getPlayers(playerNr)
+        cannon=Rectangle(Point(self.Players.start_x_value -self.game.cannon_radius,0),Point(self.Players.start_x_value+self.game.cannon_radius,self.game.cannonSize))
+        cannon.setFill("red")
+        cannon.draw(self.win)
         
         # TODO: draw a square with the size of the cannon with the color
         # and the position of the player with number playerNr.
         # After the drawing, return the rectangle object."""
-        return None
+        return cannon
 
     def drawScore(self,playerNr):
         self.Player.score
+        self.draw_scores[playerNr]
+        undraw(score)
         # draw the score
         # TODO: draw the text "Score: X", where X is the number of points
         # for player number playerNr. The text should be placed under
@@ -45,6 +49,11 @@ class GameGraphics:
         # TODO: If the circle for the projectile for the current player
         # is not None, undraw it!
 
+
+ """ p1 = Point(center.x-radius, center.y-radius)
+        p2 = Point(center.x+radius, center.y+radius)
+        Oval.__init__(self, p1, p2)
+        self.radius = radius"""
         # draw the projectile (ball/circle)
         # TODO: Create and draw a new circle with the coordinates of
         # the projectile.
