@@ -1,7 +1,6 @@
 from math import sin,cos,radians
 import random
 
-#TODO: Deal with all TODOs in this file and also remove the TODO and HINT comments.
 
 """ This is the model of the game"""
 class Game:
@@ -91,8 +90,8 @@ class Player:
         else:
             start_angle=self.angle     
 
-        starting_x=self.start_x_value #OBS byt alla direction till start_x_value
-        starting_y=0
+        starting_x=self.start_x_value 
+        starting_y=0 #starting_y = self.game.getCannonSize() / 2 ? om bollen ska gå från mitten?
     
         proj=Projectile(start_angle, velocity, self.game.getCurrentWind(), starting_x, starting_y, -110, 110)
     
@@ -110,27 +109,21 @@ class Player:
         # The distance should be how far the projectile and cannon are from touching, not the distance between their centers.
         # You probably need to use getCannonSize and getBallSize from Game to compensate for the size of cannons/cannonballs
         
-        projectile_left_edge = proj.getX() - self.game.getBallSize()
-        projectile_right_edge = proj.getX() + self.game.getBallSize()
+        projectile_x = proj.getX() #x position för boll, hur långt hö/vä från start 
+        cannon_x = self.getX() #var kanonen är
+        cannon_radius = self.game.getCannonSize() / 2 #ersatte kanterna till att det blir ett fast avstånd från mitten till kant som vi använder istället för att krångla til det med bilden
+        ball_radius = self.game.getBallSize()
 
-        player_right_edge = self.getX() + self.game.getCannonSize() / 2
-        player_left_edge = self.getX() - self.game.getCannonSize() / 2
+        # Beräkna avståndet mellan kanonens centrum och projektilens centrum
+        distance = projectile_x - cannon_x
 
-        fall1=player_left_edge - projectile_left_edge
-        fall2=player_left_edge - projectile_right_edge
-        fall3= player_right_edge - projectile_left_edge
-        fall4= player_right_edge -projectile_right_edge
-
-        if fall1 <0:
-            return("missar, går över")
-        elif fall2<0:
-            return("träff")
-        elif fall3<0:
-            ("miss, för kort")
-        elif fall4<0:
-            ("miss,")
-
-
+        # Om projektilens y-koordinat är 0, betyder det att den har landat
+        
+        if abs(distance) <= (cannon_radius + ball_radius):
+            return 0  #träff  vad vill vi returna?
+        else:
+            return distance #neg är kort och pos är för långt
+        
 
         
     """ The current score of this player """
