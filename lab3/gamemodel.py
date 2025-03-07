@@ -6,14 +6,14 @@ import random
 class Game:
     """ Create a game with a given size of cannon (length of sides) and projectiles (radius) """
     def __init__(self, cannonSize, ballSize):
-        # HINT: This constructor needs to create two players according to the rules specified in the assignment text
+        
         self.cannonSize=cannonSize
         self.ballSize=ballSize
        
         self.players=[Player(self,False,-90,"blue"), Player(self,True,90,"red")]
    
         self.currentPlayerIndex = 0 
-        self.wind = 0
+        self.wind = 20*random.random()-10
         
 
     """ A list containing both players """
@@ -69,7 +69,6 @@ class Game:
 """ Models a player """
 class Player:
    
-    #HINT: It should probably take the Game that creates it as parameter and some additional properties that differ between players (like firing-direction, position and color)
     def __init__(self, game, isReversed, start_x_value, color):
 
         self.game = game  
@@ -77,8 +76,8 @@ class Player:
         self.start_x_value = start_x_value 
         self.color = color 
         self.score = 0
-        self.angle=None
-        self.velocity=None
+        self.angle=45
+        self.velocity=40
 
 
     """ Create and return a projectile starting at the centre of this players cannon. Replaces any previous projectile for this player. """
@@ -97,24 +96,17 @@ class Player:
     
         proj=Projectile(start_angle, velocity, self.game.getCurrentWind(), starting_x, starting_y, -110, 110)
     
-        # The projectile should start in the middle of the cannon of the firing player
-        # HINT: Your job here is to call the constructor of Projectile with all the right values
-        # Some are hard-coded, like the boundaries for x-position, others can be found in Game or Player
+        
         return proj 
 
     """ Gives the x-distance from this players cannon to a projectile. If the cannon and the projectile touch (assuming the projectile 
     is on the ground and factoring in both cannon and projectile size) this method should return 0"""
     def projectileDistance(self, proj: 'Projectile'):
-        #self.proj=projs
-        # HINT: both self (a Player) and proj (a Projectile) have getX()-methods.
-        # HINT: This method should give a negative value if the projectile missed to the left and positive if it missed to the right.
-        # The distance should be how far the projectile and cannon are from touching, not the distance between their centers.
-        # You probably need to use getCannonSize and getBallSize from Game to compensate for the size of cannons/cannonballs
-        
+       
 
-        projectile_x = proj.getX() #x position för boll, hur långt hö/vä från start 
-        cannon_x = self.getX() #var kanonen är
-        cannon_radius = self.game.getCannonSize() / 2 #ersatte kanterna till att det blir ett fast avstånd från mitten till kant som vi använder istället för att krångla til det med bilden
+        projectile_x = proj.getX()  
+        cannon_x = self.getX() 
+        cannon_radius = self.game.getCannonSize() / 2 
         ball_radius = self.game.getBallSize()
 
         leftside_cannon = cannon_x-cannon_radius
@@ -185,22 +177,17 @@ class Projectile:
          for large values the projectile may move erratically)
     """
     def update(self, time):
-        # Compute new velocity based on acceleration from gravity/wind
         yvel1 = self.yvel - 9.8*time
         xvel1 = self.xvel + self.wind*time
         
-        # Move based on the average velocity in the time period 
         self.xPos = self.xPos + time * (self.xvel + xvel1) / 2.0
         self.yPos = self.yPos + time * (self.yvel + yvel1) / 2.0
         
-        # make sure yPos >= 0
         self.yPos = max(self.yPos, 0)
         
-        # Make sure xLower <= xPos <= mUpper   
         self.xPos = max(self.xPos, self.xLower)
         self.xPos = min(self.xPos, self.xUpper)
         
-        # Update velocities
         self.yvel = yvel1
         self.xvel = xvel1
         

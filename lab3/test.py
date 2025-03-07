@@ -26,25 +26,20 @@ def runTests(game):
     test(game.getCurrentPlayer() == players[0], "player 0 should start! (2)")
     test(game.getOtherPlayer() == players[1], "getOtherPlayer() doesn't work")
 
-    # Testing manually swapping player
     game.nextPlayer()
     test(game.getCurrentPlayerNumber() == 1, "player 1 should go second!")
     test(game.getCurrentPlayer() == players[1], "player 1 should go second! (2)")
     test(game.getOtherPlayer() == players[0], "getOtherPlayer() doesn't work")
 
-    # Switch back to player 0
     game.nextPlayer()
     test(game.getCurrentPlayer() == players[0], "player 0 should go after player 1!")
     test(game.getOtherPlayer() == players[1], "getOtherPlayer() doesn't work")
 
-    # Test the wind initialization
     test(-10 <= game.getCurrentWind() <= 10, "wind should be a random value in [-10,10]")
 
-    # Turn off wind
     game.setCurrentWind(0)
     test(game.getCurrentWind() == 0, "wind should be 0")
     
-    #Testing "Manual fire" for player 0
     proj = game.getCurrentPlayer().fire(30,31)
     test(proj.getX() == game.getCurrentPlayer().getX(), "Fired projectile should start at player X-position")
     test(abs(proj.getY() - 10/2) < 0.01, "Fired projectile Y-position should start half the cannon size")
@@ -70,13 +65,11 @@ def runTests(game):
     test(abs(players[1].projectileDistance(proj) - -78.03624368938841) < 0.01, "Projectile X-distance to player is {0:f}, should be -78.03624368938841".format(players[1].projectileDistance(proj)))
     test(abs(players[0].projectileDistance(proj) - 85.96375631061159) < 0.01, "Projectile X-distance to player is {0:f}, should be 85.96375631061159".format(players[0].projectileDistance(proj)))
 
-    #Switching to player 1
     game.nextPlayer()
     test(game.getCurrentPlayerNumber() == 1, "player 1 should go after player 0")
     test(game.getCurrentPlayer() == players[1], "player 1 should go after player 0")
     test(game.getOtherPlayer() == players[0], "getOtherPlayer() doesn't work")
     
-    #Testing "Manual fire" for player 1
     proj = game.getCurrentPlayer().fire(45,41)
     test(proj.getX() == game.getCurrentPlayer().getX(), "Fired projectile should start at player X-position")
     test(proj.getY() == 10/2, "Fired projectile Y-position should start half the cannon size")
@@ -93,19 +86,16 @@ def runTests(game):
     test(abs(players[1].projectileDistance(proj) - -168.84740597475547) < 0.01, "Projectile X-distance to player is {0:f}, should be 168.84740597475547".format(players[1].projectileDistance(proj)))
     test(players[0].projectileDistance(proj) == 0, "Projectile X-distance to player is {0:f}, should be 0".format(players[0].projectileDistance(proj)))
 
-    # Test scoring
     test(players[0].getScore()==0, "Initial score should be 0")
     players[0].increaseScore()
     test(players[1].getScore()==0, "Score should be 0")
     test(players[0].getScore()==1, "Score should be 1")
 
-    # Test new round
     game.setCurrentWind(1000)
     test(game.getCurrentWind()==1000, "Failed to set wind speed")
     game.newRound()
     test(game.getCurrentWind()!=1000, "Wind should be randomized each round")
 
-    # Test firing with wind
     game.setCurrentWind(-1)
     proj = players[0].fire(45,41)
     test(proj.getX() == players[0].getX(), "Fired projectile should start at player X-position")
@@ -121,7 +111,6 @@ def runTests(game):
     test(ticks == 61, "Incorrect tick-count")
     test(abs(proj.getX() - 68.2424059747553) < 0.01, "Projectile X-Position is {0:f}, should be 68.2424059747553".format(proj.getX()))
     
-    # A few additional hints
     gameAtts = len(game.__dict__.items())
     if (gameAtts > 5):
         print("Your Game object has {} attributes. This isn't necessarily wrong, but 5 seems like a nice number.".format(gameAtts))
